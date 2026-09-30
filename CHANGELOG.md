@@ -2,6 +2,13 @@
 
 All notable changes to the LeadGen.tools skill. Versions follow [semver](https://semver.org).
 
+## 1.2.0 — 2026-09-30
+
+- LinkedIn journey: `campaigns/linkedin` without campaign_id lists the campaigns with LinkedIn work; each person has
+  a `next` action (invite / check / message / wait / done), a `message` to send once they accept, new states
+  `accepted`, `messaged`, `replied` (with the reply `text`, classified by AI and stopping the emails) and
+  `not_found`, and the daily `limits`. Workflow 8 is now a daily routine.
+
 ## 1.1.0 — 2026-09-30
 
 - LinkedIn and WhatsApp after the email: `campaigns/linkedin` (profiles + ready connection notes) and

@@ -210,13 +210,23 @@ curl -s -X POST "$B/campaigns/control.php?api_key=$K" -H "Content-Type: applicat
 
 ## 8. LinkedIn and WhatsApp after the email
 
-Only when the user asks, and only with their own signed-in browser.
+Only when the user asks, and only with their own signed-in browser (Claude in Chrome, OpenClaw with browser control,
+any browser agent). The API keeps the state; you do the clicks.
 
-1. A day or two after a campaign's first emails: `GET campaigns/linkedin campaign_id=8` → show the user
-   how many people are ready and one example note; wait for their OK.
-2. For each person (few per day, 30–90 s apart): open `linkedin_url` → Connect → Add a note → paste `note`
-   → send → `POST campaigns/linkedin {"campaign_id": 8, "lead_id": …, "state": "invited"}`.
-3. WhatsApp, a few days later and only for people who haven't replied:
-   `GET campaigns/whatsapp campaign_id=8 only=likely` → open `whatsapp_web_link` → check the typed message →
-   send → `POST … "state": "sent"` (or `no_whatsapp`). 10–15 a day at most, 1–3 min apart.
-4. Stop on any warning, limit, verification or CAPTCHA and tell the user. Report: sent, skipped and why.
+**LinkedIn daily routine** (once a day, weekdays):
+1. `GET campaigns/linkedin` → campaigns with LinkedIn work (`next` counts). Show the user; for a first run show one
+   example `note` and `message` and wait for their OK.
+2. For the chosen campaign: `GET campaigns/linkedin campaign_id=8 next=all`.
+3. **Check** (`next=check`): open each profile; connected now → `POST … "state": "accepted"`.
+4. **Replies**: open linkedin.com/messaging; anyone from the lists who wrote back → `POST … "state": "replied",
+   "text": "<their message>"` — don't answer for the user; tell them (hot replies first).
+5. **Message** (`next=message`, max `limits.messages_per_day`): profile → Message → paste `message` → Send →
+   `POST … "state": "messaged"`.
+6. **Invite** (`next=invite`, max `limits.invites_per_day`): profile → wrong person → `not_found`; already
+   connected → `accepted`; else Connect → Add a note → paste `note` → Send → `POST … "state": "invited"`.
+7. 30–90 s between actions. Stop on any warning, limit, verification or CAPTCHA and tell the user.
+8. Report: accepted, replied (with category), messages sent, invitations sent, skipped and why.
+
+**WhatsApp**, a few days after the email and only for people who haven't replied:
+`GET campaigns/whatsapp campaign_id=8 only=likely` → open `whatsapp_web_link` → check the typed message →
+send → `POST … "state": "sent"` (or `no_whatsapp`). 10–15 a day at most, 1–3 min apart.

@@ -437,18 +437,41 @@ ask; then you mark each person so nobody is contacted twice.
 
 ### campaigns/linkedin
 
-`GET /campaigns/linkedin.php?campaign_id=42[&state=todo|invited|skipped|all][&lang=es]`
+The whole LinkedIn journey of a campaign, worked in the user's own signed-in browser:
+**invite (with a note) → they accept → one message → their reply** — next to the emails, which keep going on their
+own. A LinkedIn reply stops the emails like an email reply does.
 
-→ `note_template`, `note_max_chars` (300), `waiting_first_email`, `guidelines`, `people[]`: `lead_id`,
-`name`, `first_name`, `title`, `company`, `website`, `linkedin_url`, `company_linkedin_url`,
-`emailed_seconds_ago`, `state`, `note` (the connection note already filled for that person).
+`GET /campaigns/linkedin.php` (no campaign_id) → `campaigns[]`: `campaign_id`, `name`, `status`, `with_linkedin`,
+`waiting_first_email`, `next` (counts per action: `invite`, `check`, `message`, `wait`, `done`), plus `limits` and
+`routine` — start here to see which campaigns have LinkedIn work today.
 
-`POST /campaigns/linkedin.php` `{"campaign_id": 42, "lead_id": 981, "state": "invited"}` (`"skipped"`, or
-`""` to undo).
+`GET /campaigns/linkedin.php?campaign_id=42[&next=invite|check|message|wait|done|all][&lang=es]` → `people[]`:
+`lead_id`, `name`, `first_name`, `title`, `company`, `website`, `linkedin_url`, `company_linkedin_url`,
+`emailed_seconds_ago`, `replied_by_email`, `state` (`todo` | `invited` | `accepted` | `messaged` | `replied` |
+`skipped` | `not_found`), `state_at`, **`next`** (what to do now), `note` (connection note, ≤ 300 chars) and
+`message` (to send once they accept); plus `note_template`, `message_template`, `next_count`, `limits`
+(`invites_per_day`, `messages_per_day`, `seconds_between_actions`, `weekdays_only`, `hours`) and `routine`.
+Only people who already got the first email; anyone who opted out, bounced or said no by email is never to-do;
+someone who answered the email is not messaged on LinkedIn; an invitation not accepted in 21 days stops there.
 
-Rules: open `linkedin_url`; skip if already connected or pending; Connect → Add a note → paste `note`
-exactly → send. 30–90 s between invitations and few per day (LinkedIn caps invitations per week). Stop on
-any warning, verification or CAPTCHA. Never messages, InMails or follows.
+| `next` | Meaning | Do |
+|---|---|---|
+| `invite` | not contacted on LinkedIn yet | open `linkedin_url` → Connect → Add a note → paste `note` → Send → POST `invited` (wrong person → `not_found`; already connected → `accepted`) |
+| `check` | invited, not accepted yet | open the profile: connected now (1st degree) → POST `accepted`; still pending → nothing |
+| `message` | accepted | open the profile → Message → paste `message` → Send → POST `messaged` |
+| `wait` | messaged | if they answered in LinkedIn Messaging → POST `replied` with `text` |
+| `done` | replied, skipped, not the person, expired, or handled by email | nothing |
+
+`POST /campaigns/linkedin.php` `{"campaign_id": 42, "lead_id": 981, "state": "invited"}` — states `invited`,
+`accepted`, `messaged`, `replied`, `skipped`, `not_found`, or `""` to reset. With `"state": "replied"` send
+`"text"` = their LinkedIn message exactly: it is classified by AI (interested / meeting / question /
+not_interested / …), the email sequence stops, a "not interested" is never emailed again, the user is notified;
+the answer includes `reply_category`.
+
+Rules (the API returns them in `limits` / `routine`): only in the user's own signed-in browser and only when they
+ask; weekdays 8–19 h; 30–90 s between actions; at most `invites_per_day` invitations and `messages_per_day`
+messages a day; paste the note / message exactly; never InMails, follows, likes, or messages to anyone not listed;
+stop at once and tell the user on any LinkedIn warning, limit, verification or CAPTCHA.
 
 ### campaigns/whatsapp
 
