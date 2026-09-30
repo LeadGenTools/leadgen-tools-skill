@@ -2,6 +2,13 @@
 
 All notable changes to the LeadGen.tools skill. Versions follow [semver](https://semver.org).
 
+## 1.1.0 — 2026-09-30
+
+- LinkedIn and WhatsApp after the email: `campaigns/linkedin` (profiles + ready connection notes) and
+  `campaigns/whatsapp` (international phones, whether they're on WhatsApp, the message and a link that opens
+  the chat with it typed), with their safety rules; new workflow 8. The old "no LinkedIn automation" limit
+  is replaced by how to do it safely in the user's own browser.
+
 ## 1.0.0 — 2026-09-27
 
 First public release.

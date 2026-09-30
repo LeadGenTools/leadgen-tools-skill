@@ -428,3 +428,39 @@ Categories: `interested`, `meeting` (wants to talk), `question`, `not_interested
 `unsubscribe` (never emailed again), `out_of_office` (the sequence waits until they're back, it isn't a
 reply), `wrong_person`, `other`. `503 not_available` when `category` is used on a server without reply
 classification. Replies are checked every 15 minutes.
+
+## After the email: LinkedIn and WhatsApp
+
+Both are free, list only people who already got the campaign's first email, and never list anyone who
+opted out, bounced or said no. You act in the user's own signed-in browser (or WhatsApp Web), only when they
+ask; then you mark each person so nobody is contacted twice.
+
+### campaigns/linkedin
+
+`GET /campaigns/linkedin.php?campaign_id=42[&state=todo|invited|skipped|all][&lang=es]`
+
+→ `note_template`, `note_max_chars` (300), `waiting_first_email`, `guidelines`, `people[]`: `lead_id`,
+`name`, `first_name`, `title`, `company`, `website`, `linkedin_url`, `company_linkedin_url`,
+`emailed_seconds_ago`, `state`, `note` (the connection note already filled for that person).
+
+`POST /campaigns/linkedin.php` `{"campaign_id": 42, "lead_id": 981, "state": "invited"}` (`"skipped"`, or
+`""` to undo).
+
+Rules: open `linkedin_url`; skip if already connected or pending; Connect → Add a note → paste `note`
+exactly → send. 30–90 s between invitations and few per day (LinkedIn caps invitations per week). Stop on
+any warning, verification or CAPTCHA. Never messages, InMails or follows.
+
+### campaigns/whatsapp
+
+`GET /campaigns/whatsapp.php?campaign_id=42[&state=todo|sent|skipped|no_whatsapp|all][&only=confirmed|likely]`
+
+→ `people[]` with the phone in international format, `whatsapp` = `confirmed` (their website links it) |
+`mobile` | `unknown` | `landline`, the `message` written from the campaign's template, `wa_link` and
+`whatsapp_web_link` (open the chat with the message typed). `only=likely` = confirmed + mobile.
+
+`POST /campaigns/whatsapp.php` `{"campaign_id": 42, "lead_id": 981, "state": "sent"}` (`"no_whatsapp"`,
+`"skipped"`, or `""` to undo).
+
+Rules: open `whatsapp_web_link`; if WhatsApp says the number isn't on WhatsApp, mark `no_whatsapp`; if
+there is an earlier conversation, send nothing; check the message and send it. 10–15 new chats a day at
+most, 1–3 min apart; stop on any warning or limit. No attachments, no calls.

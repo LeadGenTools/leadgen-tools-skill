@@ -22,6 +22,7 @@ $LG POST verify '{"emails":["info@acme.com"]}'
 5. [Export leads to the user's own mailer or CRM](#5-export-leads-to-the-users-own-mailer-or-crm)
 6. [Poll campaign status and replies](#6-poll-campaign-status-and-replies)
 7. [Other sources: search, ads, one website](#7-other-sources-search-ads-one-website)
+8. [LinkedIn and WhatsApp after the email](#8-linkedin-and-whatsapp-after-the-email)
 
 ---
 
@@ -206,3 +207,16 @@ curl -s -X POST "$B/campaigns/control.php?api_key=$K" -H "Content-Type: applicat
   `people.php?domain=example.com&offer=…` for the right person.
 - **Reputation angle** for emails: `places/reviews.php?place_id=<companies[].id>` to reference recent reviews
   (1 credit each; use sparingly).
+
+## 8. LinkedIn and WhatsApp after the email
+
+Only when the user asks, and only with their own signed-in browser.
+
+1. A day or two after a campaign's first emails: `GET campaigns/linkedin campaign_id=8` → show the user
+   how many people are ready and one example note; wait for their OK.
+2. For each person (few per day, 30–90 s apart): open `linkedin_url` → Connect → Add a note → paste `note`
+   → send → `POST campaigns/linkedin {"campaign_id": 8, "lead_id": …, "state": "invited"}`.
+3. WhatsApp, a few days later and only for people who haven't replied:
+   `GET campaigns/whatsapp campaign_id=8 only=likely` → open `whatsapp_web_link` → check the typed message →
+   send → `POST … "state": "sent"` (or `no_whatsapp`). 10–15 a day at most, 1–3 min apart.
+4. Stop on any warning, limit, verification or CAPTCHA and tell the user. Report: sent, skipped and why.

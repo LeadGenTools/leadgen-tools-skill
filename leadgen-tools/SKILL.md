@@ -32,6 +32,8 @@ You bring the judgment and the schedule; LeadGen.tools does the data and the sen
 | **Follow up automatically** in the same thread until they reply | built into every campaign |
 | **Know who's interested**: replies classified interested / meeting / question / not interested / out of office… with summary and text | `campaigns/recipients?category=hot` |
 | **Pause, resume, cancel, edit** campaigns; track sent, replies, bounces | `campaigns/control`, `campaigns/steps`, `campaigns/status` |
+| **LinkedIn after the email**: everyone already emailed with a LinkedIn profile + a ready connection note — you send the invitations in the user's signed-in browser | `campaigns/linkedin` — free |
+| **WhatsApp after the email**: decision makers' phones in international format, whether they're on WhatsApp, the message and a link that opens the chat with it typed | `campaigns/whatsapp` — free |
 
 Ready-made automations (weekly prospecting, morning reply briefing, account-based lists, city-by-city
 expansion, advertisers, review angles, CRM enrichment, pre-meeting briefs, agencies, second-chance
@@ -194,4 +196,7 @@ step you suggest. For campaigns: sent, replies by category, bounces, what's pend
   inbox (or your own mail tool, only if the user asks).
 - A launched campaign doesn't accept new leads: each new batch is a new campaign (copy the approved steps).
 - Brands, team members, autopilot and mailbox-to-brand assignment are managed in the web app.
-- No LinkedIn automation, no phone dialing, no SMS.
+- LinkedIn and WhatsApp: the API gives you the people, the ready message and the links; you act only in the
+  user's own signed-in browser, only when they ask, a few per day, spaced out, and you stop on any warning,
+  limit, verification or CAPTCHA. Never messages/InMails on LinkedIn, never attachments or calls on WhatsApp.
+  Mark each person afterwards (`POST`) so nobody gets it twice. No phone dialing, no SMS.
