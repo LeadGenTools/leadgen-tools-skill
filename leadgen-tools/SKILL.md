@@ -41,9 +41,10 @@ campaigns, performance tuning, inbound lead research): [references/playbooks.md]
 
 ## Setup
 
-1. **API key**: the user gets it at LeadGen.tools → **API & Agents** (sidebar, under Advanced tools) or
-   https://leadgen.tools/members/softsale/license. It spends the account's credits — treat it like a
-   password: never print it, log it, put it in files or share it in chat.
+1. **API key** — one click: the user opens https://leadgen.tools/v2/app/core.php?section=api&new=1 (signs in, or creates a free account at
+   https://leadgen.tools first) and clicks **Create API key**. Keys start with `lgk_`, are shown once, and can be
+   revoked there; an older license key also works. It spends the account's credits — treat it like a password:
+   never print it, log it, put it in files or share it in chat. No key yet? Send the user that link and wait.
 2. OpenClaw: set it once in `~/.openclaw/openclaw.json`:
    ```json5
    { skills: { entries: { "leadgen-tools": { enabled: true, apiKey: "THE_KEY" } } } }
@@ -168,7 +169,7 @@ contacting 50 prospects = 50 · a 3-email sequence = 3.
 
 | HTTP | code | Do this |
 |---|---|---|
-| 401 | `missing_api_key`, `invalid_api_key` | Ask the user for a valid key (API & Agents page). Stop. |
+| 401 | `missing_api_key`, `invalid_api_key` | Ask the user for a valid key: https://leadgen.tools/v2/app/core.php?section=api&new=1 → Create API key. Stop. |
 | 402 | `insufficient_credits` | Tell the user the balance (`message`); they can top up in the app. Don't retry. |
 | 400 | `missing_param`, `invalid_param`, `invalid_json`, `invalid_body` | Fix the request, retry once. |
 | 400 | `invalid_state`, `launch_error`, `campaign_error` | Read `message` (wrong status, no steps, no inbox, no valid recipients) and fix. |

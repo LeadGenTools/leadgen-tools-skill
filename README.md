@@ -32,7 +32,7 @@ openclaw skills install @leadgen/leadgen-tools
 ### OpenClaw (from GitHub)
 
 ```bash
-openclaw skills install git:leadgentools/leadgen-tools-skill@main
+openclaw skills install git:LeadGenTools/leadgen-tools-skill@main
 ```
 
 ### Manual (any agent)
@@ -49,7 +49,8 @@ Copy the `leadgen-tools` folder into your agent's skills folder:
 ## Connect your account
 
 1. Create an account at [leadgen.tools](https://leadgen.tools) (free to start).
-2. In the app: **API & Agents** → copy your API key.
+2. Open **[API & Agents → Create API key](https://leadgen.tools/v2/app/core.php?section=api&new=1)** — one click. Copy the key (it starts with `lgk_` and
+   is shown once; you can revoke it and create another any time).
 3. Give it to the skill.
 
    OpenClaw — `~/.openclaw/openclaw.json`:

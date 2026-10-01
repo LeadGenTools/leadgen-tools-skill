@@ -2,6 +2,11 @@
 
 All notable changes to the LeadGen.tools skill. Versions follow [semver](https://semver.org).
 
+## 1.2.1 — 2026-09-30
+
+- Setup: the API key is created in one click at LeadGen.tools → API & Agents (`…core.php?section=api&new=1`);
+  keys start with `lgk_`, are shown once and can be revoked. Public repo: github.com/LeadGenTools/leadgen-tools-skill.
+
 ## 1.2.0 — 2026-09-30
 
 - LinkedIn journey: `campaigns/linkedin` without campaign_id lists the campaigns with LinkedIn work; each person has
