@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://leadgen.tools"><img src="assets/banner.png" alt="LeadGen.tools agent skill — your AI agent finds customers and gets replies" width="100%"></a>
+  <a href="https://leadgen.tools"><img src="assets/banner.png" alt="LeadGen.tools agent skill: your AI agent finds customers and gets replies" width="100%"></a>
 </p>
 
 <p align="center">
@@ -35,10 +35,10 @@ Just ask, in plain words:
 | *“Find 50 dental clinics in Austin with the owner's email.”* | Real businesses from maps data, crawls their websites, finds the decision maker with a verified email |
 | *“Every Monday, find 40 new real estate agencies in Madrid, write the emails and ask me before sending.”* | A weekly routine that never contacts the same company twice |
 | *“Who answered my campaigns? Draft replies for the interested ones.”* | Reads every reply already classified (interested · meeting · question · not interested · out of office…) |
-| *“Here are 30 target accounts — find the marketing head at each and start a 3-email sequence.”* | Account-based outreach with the right person at each company |
+| *“Here are 30 target accounts. Find the marketing head at each and start a 3-email sequence.”* | Account-based outreach with the right person at each company |
 | *“Which plumbers are running Google ads in Miami this week? Contact them.”* | Companies spending on ads (they have budget) |
 | *“Brief me on this company before my 3 pm call.”* | Website, emails, phones, socials and who's who |
-| *“Do today's LinkedIn follow-up for my campaign.”* | Invitations with a note, one message to those who accept, replies back into the campaign — in your own browser, with safe limits |
+| *“Do today's LinkedIn follow-up for my campaign.”* | Invitations with a note, one message to those who accept, replies back into the campaign, in your own browser, with safe limits |
 
 Twelve ready-made automations: [`playbooks.md`](leadgen-tools/references/playbooks.md) · step-by-step recipes:
 [`workflows.md`](leadgen-tools/references/workflows.md).
@@ -72,7 +72,7 @@ cp -r leadgen-tools-skill/leadgen-tools ~/.claude/skills/leadgen-tools   # e.g. 
 ClawHub (OpenClaw's registry): coming soon.
 </details>
 
-### 2. Create your API key — one click
+### 2. Create your API key in one click
 
 Create a free account at **[leadgen.tools](https://leadgen.tools)**, then open
 **[API & Agents → Create API key](https://leadgen.tools/v2/app/core.php?section=api&new=1)**.
