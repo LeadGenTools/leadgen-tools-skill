@@ -4,6 +4,7 @@ All notable changes to the LeadGen.tools skill. Versions follow [semver](https:/
 
 ## 1.2.1 — 2026-09-30
 
+- New README: banner, animated pipeline, examples, one-click API key, LinkedIn & WhatsApp, pricing table.
 - Setup: the API key is created in one click at LeadGen.tools → API & Agents (`…core.php?section=api&new=1`);
   keys start with `lgk_`, are shown once and can be revoked. Public repo: github.com/LeadGenTools/leadgen-tools-skill.
 
