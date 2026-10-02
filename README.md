@@ -43,6 +43,8 @@ Just ask, in plain words:
 Twelve ready-made automations: [`playbooks.md`](leadgen-tools/references/playbooks.md) · step-by-step recipes:
 [`workflows.md`](leadgen-tools/references/workflows.md).
 
+> 🎬 See how it works, with an example conversation: **https://leadgen.tools/v2/try/agents**
+
 ## 🚀 Get started in 3 steps
 
 ### 1. Install the skill
@@ -69,7 +71,6 @@ git clone https://github.com/LeadGenTools/leadgen-tools-skill.git
 cp -r leadgen-tools-skill/leadgen-tools ~/.claude/skills/leadgen-tools   # e.g. Claude Code
 ```
 
-ClawHub (OpenClaw's registry): coming soon.
 </details>
 
 ### 2. Create your API key in one click

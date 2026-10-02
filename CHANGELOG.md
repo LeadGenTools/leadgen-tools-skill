@@ -2,6 +2,11 @@
 
 All notable changes to the LeadGen.tools skill. Versions follow [semver](https://semver.org).
 
+## 1.2.2 · 2026-10-02
+
+- README links the public page that shows how the skill works (leadgen.tools/v2/try/agents); install instructions
+  point to GitHub only until the skill is on ClawHub.
+
 ## 1.2.1 — 2026-09-30
 
 - New README: banner, animated pipeline, examples, one-click API key, LinkedIn & WhatsApp, pricing table.
